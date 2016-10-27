@@ -36,20 +36,20 @@ public class Service {
                 + "</KAF>";
 
         s = OpenerService("http://localhost:9293", s);
-        System.out.println(s);
+        //System.out.println(s);
         s = OpenerService("http://localhost:9294", s);
-        System.out.println(s);
-        s = OpenerService("http://localhost:9295", s);
-        System.out.println(s);
-        s = OpenerService("http://localhost:9296", s);
-        System.out.println(s);
+        //System.out.println(s);
+        //s = OpenerService("http://localhost:9295", s);
+        //System.out.println(s);
+        //s = OpenerService("http://localhost:9296", s);
+        //System.out.println(s);
         s = OpenerService("http://localhost:9297", s);
         System.out.println(s);
 
         try {
             // http://stackoverflow.com/questions/5245840/how-to-convert-string-to-jsonobject-in-java
             JSONObject jsonObj = new JSONObject(s);
-            System.out.println(jsonObj);
+            //System.out.println(jsonObj);
             JSONObject lemma = jsonObj.getJSONObject("terms");
 
             //System.out.println("ESte es el lemma" + lemma);
@@ -75,17 +75,17 @@ public class Service {
             nameValuePairs.add(new BasicNameValuePair("kaf","true"));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs)); 
 
-            System.out.println("executing request " + httpPost.getRequestLine());
+            //System.out.println("executing request " + httpPost.getRequestLine());
             HttpResponse response = httpclient.execute(httpPost);
             HttpEntity resEntity = response.getEntity();
 
-            System.out.println("----------------------------------------");
-            System.out.println(response.getStatusLine());
+            //System.out.println("----------------------------------------");
+            //System.out.println(response.getStatusLine());
             if (resEntity != null) {
-                System.out.println("Response content length: " + resEntity.getContentLength());
-                System.out.println("Chunked?: " + resEntity.isChunked());
+                //System.out.println("Response content length: " + resEntity.getContentLength());
+                //System.out.println("Chunked?: " + resEntity.isChunked());
                 String responseBody = EntityUtils.toString(resEntity);
-                System.out.println("Data: " + responseBody);
+                //System.out.println("Data: " + responseBody);
                 return responseBody;
             }
            
