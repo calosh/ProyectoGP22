@@ -1,0 +1,135 @@
+{
+	"text"      : "Estoy en el banco depositando dinero ",
+	"language"  : "es",
+	"terms"     : {
+ 	"t1":
+	{
+		"type"       :"open",
+		"lemma"      :"estoy",
+		"text"       :"Estoy",
+		"pos"        :"V",
+		"morphofeat" :"VMIP1S0"
+	},
+ 	"t2":
+	{
+		"type"       :"close",
+		"lemma"      :"en",
+		"text"       :"en",
+		"pos"        :"P",
+		"morphofeat" :"SPS00"
+	},
+ 	"t3":
+	{
+		"type"       :"close",
+		"lemma"      :"el",
+		"text"       :"el",
+		"pos"        :"D",
+		"morphofeat" :"DA0MS0"
+	},
+ 	"t4":
+	{
+		"type"       :"open",
+		"lemma"      :"banco",
+		"text"       :"banco",
+		"pos"        :"N",
+		"morphofeat" :"NCMS000",
+		"sentiment"  :
+		{
+			"lexicon" :"General domain lexicon for Spanish . EHU_general_lexicon_spanish",
+			"polarity":"neutral"
+		}
+,
+		"opinion"    :"o1"
+	},
+ 	"t5":
+	{
+		"type"       :"open",
+		"lemma"      :"depositar",
+		"text"       :"depositando",
+		"pos"        :"V",
+		"morphofeat" :"VMG0000",
+		"sentiment"  :
+		{
+			"lexicon" :"General domain lexicon for Spanish . EHU_general_lexicon_spanish",
+			"polarity":"neutral"
+		}
+
+	},
+ 	"t6":
+	{
+		"type"       :"open",
+		"lemma"      :"dinero",
+		"text"       :"dinero",
+		"pos"        :"N",
+		"morphofeat" :"NCMS000",
+		"sentiment"  :
+		{
+			"lexicon" :"General domain lexicon for Spanish . EHU_general_lexicon_spanish",
+			"polarity":"positive"
+		}
+,
+		"opinion"    :"o1"
+	}},
+	"sentiments"  : {
+	"s1":
+	{
+		"lexicon" :"General domain lexicon for Spanish . EHU_general_lexicon_spanish",
+		"polarity":"neutral",
+		"termId"  :"t4",
+		"text"    :"banco"
+	},
+	"s2":
+	{
+		"lexicon" :"General domain lexicon for Spanish . EHU_general_lexicon_spanish",
+		"polarity":"neutral",
+		"termId"  :"t5",
+		"text"    :"depositando"
+	},
+	"s3":
+	{
+		"lexicon" :"General domain lexicon for Spanish . EHU_general_lexicon_spanish",
+		"polarity":"positive",
+		"termId"  :"t6",
+		"text"    :"dinero"
+	}},"opinions"    : {
+ 	"o1":
+	{   
+		"target"    :["t4"],
+		"expression":["t6"],
+		"polarity"  :"positive",
+		"strength"  :"1",
+		"text"      :"dinero"
+	}},
+	
+	"lp"        : [
+{
+	"name"     :"opener-sentence-splitter-es",
+	"timestamp":"2016-10-27T15:11:31Z",
+	"version"  :"0.0.1",
+	"layer"    :"text"
+},
+{
+	"name"     :"opener-tokenizer-es",
+	"timestamp":"2016-10-27T15:11:31Z",
+	"version"  :"1.0.1",
+	"layer"    :"text"
+},
+{
+	"name"     :"ehu-pos-es",
+	"timestamp":"2016-10-27T10:11:31-0500",
+	"version"  :"1.0",
+	"layer"    :"terms"
+},
+{
+	"name"     :"VUA polarity tagger multilanguage",
+	"timestamp":"2016-10-27T10:11:33ECT",
+	"version"  :"21may2014_1.2",
+	"layer"    :"terms"
+},
+{
+	"name"     :"Basic opinion detector with Pos",
+	"timestamp":"*",
+	"version"  :"13may2015-2.0",
+	"layer"    :"opinions"
+}]
+}
