@@ -22,23 +22,18 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-
+/*
+    Codigo original para enviar parametros y realizar consultas mediante POST
+    http://www.mysamplecode.com/2011/08/java-http-post-with-parameters-using.html
+*/
 public class RequestParamExample {
-
-   /*
-    public static void main(String[] args)
-    {
-        HttpParameterPost();
-
-    }
-    */
 
     private static void  HttpParameterPost() {
 
         HttpClient httpclient = new DefaultHttpClient();
 
         try {
-
+            
             HttpPost httpPost = new HttpPost("http://localhost:8080/examples/servlets/servlet/RequestParamExample");
 
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -71,10 +66,6 @@ public class RequestParamExample {
             // immediate deallocation of all system resources
             httpclient.getConnectionManager().shutdown();
         }
-
-
-
     }
-
 }
 

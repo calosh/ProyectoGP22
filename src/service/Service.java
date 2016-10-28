@@ -26,29 +26,30 @@ import org.json.JSONObject;
 
 
 public class Service {
-
+    
+    /*
+      Este metodo realiza consultas a las diferentes Web Services de OpeNER  
+    */
     public static String opener(String frase){
-        //HttpParameterPost();
-        //String frase = "Los politicos son corruptos";
-        String s = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>"
+        String input = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>"
                 + "<KAF xml:lang='es' version='2.1'>"
                 + "<raw>" + frase + "</raw>"
                 + "</KAF>";
 
-        s = OpenerService("http://localhost:9293", s);
+        input = OpenerService("http://localhost:9293", input);
         //System.out.println(s);
-        s = OpenerService("http://localhost:9294", s);
+        input = OpenerService("http://localhost:9294", input);
         //System.out.println(s);
         //s = OpenerService("http://localhost:9295", s);
         //System.out.println(s);
         //s = OpenerService("http://localhost:9296", s);
         //System.out.println(s);
-        s = OpenerService("http://localhost:9297", s);
-        System.out.println(s);
+        input = OpenerService("http://localhost:9297", input);
+        System.out.println(input);
 
         try {
             // http://stackoverflow.com/questions/5245840/how-to-convert-string-to-jsonobject-in-java
-            JSONObject jsonObj = new JSONObject(s);
+            JSONObject jsonObj = new JSONObject(input);
             //System.out.println(jsonObj);
             JSONObject lemma = jsonObj.getJSONObject("terms");
 
@@ -59,26 +60,25 @@ public class Service {
             System.out.println("Error json");
             return null;
         }
-
     }
-   
-    private static String  OpenerService(String url, String input) {
-        // http://www.mysamplecode.com/2011/08/java-http-post-with-parameters-using.html 
+   /*
+    Metodo que permite enviar y recibir parametros mediante POST.
+    Devuelve una cadena de la consulta a la Web Service
+    http://www.mysamplecode.com/2011/08/java-http-post-with-parameters-using.html
+    */
+    private static String  OpenerService(String url, String input) {  
 
         HttpClient httpclient = new DefaultHttpClient();
 
         try {
             HttpPost httpPost = new HttpPost(url);
-
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
             nameValuePairs.add(new BasicNameValuePair("input",input));
             nameValuePairs.add(new BasicNameValuePair("kaf","true"));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs)); 
-
             //System.out.println("executing request " + httpPost.getRequestLine());
             HttpResponse response = httpclient.execute(httpPost);
             HttpEntity resEntity = response.getEntity();
-
             //System.out.println("----------------------------------------");
             //System.out.println(response.getStatusLine());
             if (resEntity != null) {
@@ -88,18 +88,11 @@ public class Service {
                 //System.out.println("Data: " + responseBody);
                 return responseBody;
             }
-           
-           
             EntityUtils.consume(resEntity);
-        } 
-        catch (Exception e) {
+        }catch (Exception e) {
             System.out.println(e);
-            System.out.println("Erroooorr 1");
             return null;
         }
-        
-    return null;
-    
+        return null;
     }
-
 }
