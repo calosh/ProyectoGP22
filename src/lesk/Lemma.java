@@ -115,18 +115,17 @@ public class Lemma {
         return "pos:"+pos+", lemma:"+lemma+", text: "+text+", type:"+type+", morphofeat:"+morphofeat+"\n";
     }
     
-    public static void filtrarLemmas(){
+    public static void deleteStopWords(){
+        // verbos, adjetivos o sustantivos.
         Iterator<Lemma> it = lemmas.iterator();
         
         while(it.hasNext()){
             Lemma l = new Lemma();
             l=it.next();
             String pos = l.getPos();
-            if(pos.equals("O")||pos.equals("D")||pos.equals("P")||pos.equals("R")){ 
-                //System.out.println(l.getPos()+""+l.getLemma()+""+l.getText()+""+l.getType()+""+l.getMorphofeat());
-            }else{
+            if(pos.equals("N")||pos.equals("V")||pos.equals("G")){ 
                 lemmasFiltrados.add(new Lemma(l.getPos(),l.getLemma(),l.getText(),l.getType(),l.getMorphofeat()));
-            }  
+            } 
         }
             
 

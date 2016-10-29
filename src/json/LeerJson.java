@@ -20,6 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lesk.Lemma;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
+import static prueba.Json.PRETTY_PRINT_INDENT_FACTOR;
+import static prueba.Json.TEST_XML_STRING;
  
 public class LeerJson {
     
