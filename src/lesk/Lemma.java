@@ -5,6 +5,10 @@
  */
 package lesk;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  *
  * @author calosh
@@ -14,6 +18,9 @@ package lesk;
     Esta clase se utiliza para guardar informacion de cada palabra 
 */
 public class Lemma {
+
+    public static List<Lemma> lemmas = new ArrayList<>();
+    public static List<Lemma> lemmasFiltrados = new ArrayList<>();
     
     private String pos;
     private String lemma;
@@ -105,8 +112,24 @@ public class Lemma {
     @Override
     public String toString(){
         // {"pos":"V","lemma":"estoy","text":"Estoy","type":"open","morphofeat":"VMIP1S0"}
-        return "pos:"+pos+", lemma:"+lemma+", text: "+text+", type:"+type+", morphofeat:"+morphofeat;
+        return "pos:"+pos+", lemma:"+lemma+", text: "+text+", type:"+type+", morphofeat:"+morphofeat+"\n";
     }
     
+    public static void filtrarLemmas(){
+        Iterator<Lemma> it = lemmas.iterator();
+        
+        while(it.hasNext()){
+            Lemma l = new Lemma();
+            l=it.next();
+            String pos = l.getPos();
+            if(pos.equals("O")||pos.equals("D")||pos.equals("P")||pos.equals("R")){ 
+                //System.out.println(l.getPos()+""+l.getLemma()+""+l.getText()+""+l.getType()+""+l.getMorphofeat());
+            }else{
+                lemmasFiltrados.add(new Lemma(l.getPos(),l.getLemma(),l.getText(),l.getType(),l.getMorphofeat()));
+            }  
+        }
+            
 
+        // lemma.getPos ()=="O"||lemma.getPos()=="D"||lemma.getPos()=="P"||lemma.getPos()=="R"
+    }
 }

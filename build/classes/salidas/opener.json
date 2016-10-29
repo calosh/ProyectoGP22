@@ -1,0 +1,75 @@
+{
+	"text"      : "Estoy depositando dinero en el banco ",
+	"language"  : "es",
+	"terms"     : {
+ 	"t1":
+	{
+		"type"       :"open",
+		"lemma"      :"estoy",
+		"text"       :"Estoy",
+		"pos"        :"V",
+		"morphofeat" :"VMIP1S0"
+	},
+ 	"t2":
+	{
+		"type"       :"open",
+		"lemma"      :"depositar",
+		"text"       :"depositando",
+		"pos"        :"V",
+		"morphofeat" :"VMG0000"
+	},
+ 	"t3":
+	{
+		"type"       :"open",
+		"lemma"      :"dinero",
+		"text"       :"dinero",
+		"pos"        :"N",
+		"morphofeat" :"NCMS000"
+	},
+ 	"t4":
+	{
+		"type"       :"close",
+		"lemma"      :"en",
+		"text"       :"en",
+		"pos"        :"P",
+		"morphofeat" :"SPS00"
+	},
+ 	"t5":
+	{
+		"type"       :"close",
+		"lemma"      :"el",
+		"text"       :"el",
+		"pos"        :"D",
+		"morphofeat" :"DA0MS0"
+	},
+ 	"t6":
+	{
+		"type"       :"open",
+		"lemma"      :"banco",
+		"text"       :"banco",
+		"pos"        :"N",
+		"morphofeat" :"NCMS000"
+	}},
+	
+	
+	"lp"        : [
+{
+	"name"     :"opener-sentence-splitter-es",
+	"timestamp":"2016-10-28T18:15:47Z",
+	"version"  :"0.0.1",
+	"layer"    :"text"
+},
+{
+	"name"     :"opener-tokenizer-es",
+	"timestamp":"2016-10-28T18:15:47Z",
+	"version"  :"1.0.1",
+	"layer"    :"text"
+},
+{
+	"name"     :"ehu-pos-es",
+	"timestamp":"2016-10-28T13:15:50-0500",
+	"version"  :"1.0",
+	"layer"    :"terms"
+}]
+}
+

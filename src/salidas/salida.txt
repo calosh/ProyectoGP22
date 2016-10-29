@@ -1,0 +1,7 @@
+{"t4":{"pos":"P","lemma":"en","text":"en","type":"close","morphofeat":"SPS00"},"t5":{"pos":"D","lemma":"el","text":"el","type":"close","morphofeat":"DA0MS0"},"t6":{"pos":"N","lemma":"banco","text":"banco","type":"open","morphofeat":"NCMS000"},"t1":{"pos":"V","lemma":"estoy","text":"Estoy","type":"open","morphofeat":"VMIP1S0"},"t2":{"pos":"V","lemma":"depositar","text":"depositando","type":"open","morphofeat":"VMG0000"},"t3":{"pos":"N","lemma":"dinero","text":"dinero","type":"open","morphofeat":"NCMS000"}}
+pos:P, lemma:en, text: en, type:close, morphofeat:SPS00
+pos:D, lemma:el, text: el, type:close, morphofeat:DA0MS0
+pos:N, lemma:banco, text: banco, type:open, morphofeat:NCMS000
+pos:V, lemma:estoy, text: Estoy, type:open, morphofeat:VMIP1S0
+pos:V, lemma:depositar, text: depositando, type:open, morphofeat:VMG0000
+pos:N, lemma:dinero, text: dinero, type:open, morphofeat:NCMS000

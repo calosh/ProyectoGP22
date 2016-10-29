@@ -30,7 +30,6 @@ public class LeerJson {
     static String type = "";
     static String morphofeat = "";
 
-    public static List<Lemma> lemmas = new ArrayList<>();
  
     /*
         Metodo que recorre un json y almacena la informacion en objetos de la clase Lemma
@@ -59,7 +58,7 @@ public class LeerJson {
                        
                     if (cont==5) {
                         cont=0;
-                        lemmas.add(new Lemma(pos,lemma,text,type,morphofeat));
+                        Lemma.lemmas.add(new Lemma(pos,lemma,text,type,morphofeat));
                     }    
                 }
             }

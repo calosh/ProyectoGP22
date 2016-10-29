@@ -10,6 +10,7 @@ import static json.LeerJson.handleObject;
 import service.Service;
 
 import com.eclipsesource.json.JsonObject;
+import lesk.Lemma;
 
 /**
  *
@@ -38,16 +39,29 @@ public class Main {
         dumpJSONElement(datos);
         */
         
-        String data = Service.opener("Estoy depositando dinero en el banco de Loja");
-        System.out.println(data);
+        /*
+        Ejecutar:
+                tokenizer-server -p 9293
+                pos-tagger-server -p 9294
+                kaf2json-server -p 9297
+                
+         */
+        String data = Service.opener("Estoy depositando dinero en el banco, cuando termire voy a verte en la casa. Estarasme esperando en la puerta de tu casa");
+        //System.out.println(data);
         JsonObject jsonObject = JsonObject.readFrom(data);
         handleObject(jsonObject);
-        
-        //System.out.println(json.LeerJson.lemmas);
        
-        json.LeerJson.lemmas.
+        /*
+        System.out.println(lesk.Lemma.lemmas);
+        esk.Lemma.lemmas.
                 stream().
                 forEach(System.out::println);
+        */
+        
+        Lemma.filtrarLemmas();
+        System.out.println(lesk.Lemma.lemmas);
+        System.out.println(lesk.Lemma.lemmasFiltrados);
+        
                
     }
 }
