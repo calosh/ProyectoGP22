@@ -10,6 +10,7 @@ package service;
  * @author calosh
  */
 
+import com.eclipsesource.json.JsonObject;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -33,24 +34,24 @@ public class Service {
     /*
       Este metodo realiza consultas a las diferentes Web Services de OpeNER  
     */
-    public static String opener(String input) throws UnsupportedEncodingException{
+    public static JsonObject opener(String input) throws UnsupportedEncodingException{
 
         input = new String(input.getBytes("UTF-8"), "ISO-8859-1");
         input = OpenerService("http://localhost:9292", input);
-        System.out.println("Languaje "+input);
+        //System.out.println("Languaje "+input);
         input = new String(input.getBytes("UTF-8"), "ISO-8859-1");
         input = OpenerService("http://localhost:9293", input);
-        System.out.println("Tokenaizer "+input);
+        //System.out.println("Tokenaizer "+input);
         input = new String(input.getBytes("UTF-8"), "ISO-8859-1");
         input = OpenerService("http://localhost:9294", input);
-        System.out.println("POS "+input);
+        //System.out.println("POS "+input);
         //s = OpenerService("http://localhost:9295", s);
         //System.out.println(input);
         //s = OpenerService("http://localhost:9296", s);
         //System.out.println(input);
         input = new String(input.getBytes("UTF-8"), "ISO-8859-1");
         input = OpenerService("http://localhost:9297", input);
-        System.out.println(new String(input.getBytes("ISO-8859-1"), "UTF-8"));
+        //System.out.println(new String(input.getBytes("ISO-8859-1"), "UTF-8"));
         String inputDecode= new String(input.getBytes("ISO-8859-1"), "UTF-8");
         
         try {
@@ -60,7 +61,7 @@ public class Service {
             JSONObject lemma = jsonObj.getJSONObject("terms");
 
             //System.out.println("ESte es el lemma" + lemma);
-            return lemma+"";
+            return JsonObject.readFrom(lemma+"");
 
         } catch (Exception e) {
             System.out.println("Error json");
@@ -80,8 +81,9 @@ public class Service {
             HttpPost httpPost = new HttpPost(url);
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
             nameValuePairs.add(new BasicNameValuePair("input",input));
+            
             if("http://localhost:9292".equals(url)){
-                System.out.println("Siíií");
+            
             }else{
                  nameValuePairs.add(new BasicNameValuePair("kaf","true"));
             }

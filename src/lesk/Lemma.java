@@ -18,9 +18,11 @@ import java.util.List;
     Esta clase se utiliza para guardar informacion de cada palabra 
 */
 public class Lemma {
-
+    // Conjunto de Lemmas de la frase
     public static List<Lemma> lemmas = new ArrayList<>();
-    public static List<Lemma> lemmasFiltrados = new ArrayList<>();
+    // Conjunto de Lemmas de la frase sin Stop Words
+    public static List<Lemma> lemmasContexto = new ArrayList<>();
+    // Conjunto de Lemmas del Contexto
     
     private String pos;
     private String lemma;
@@ -114,8 +116,26 @@ public class Lemma {
         // {"pos":"V","lemma":"estoy","text":"Estoy","type":"open","morphofeat":"VMIP1S0"}
         return "pos:"+pos+", lemma:"+lemma+", text: "+text+", type:"+type+", morphofeat:"+morphofeat+"\n";
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Lemma otro = (Lemma) obj;
+
+        return text == text;
+    }
     
-    public static void deleteStopWords(){
+    public static void deleteStopWords(List<Lemma> lemmas, List<Lemma> lemmasFiltrados){
         // verbos, adjetivos o sustantivos.
         Iterator<Lemma> it = lemmas.iterator();
         
@@ -128,7 +148,5 @@ public class Lemma {
             } 
         }
             
-
-        // lemma.getPos ()=="O"||lemma.getPos()=="D"||lemma.getPos()=="P"||lemma.getPos()=="R"
     }
 }

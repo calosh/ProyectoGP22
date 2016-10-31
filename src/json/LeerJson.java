@@ -20,11 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lesk.Lemma;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.XML;
-import static prueba.Json.PRETTY_PRINT_INDENT_FACTOR;
-import static prueba.Json.TEST_XML_STRING;
  
 public class LeerJson {
     
@@ -40,10 +35,10 @@ public class LeerJson {
         Metodo que recorre un json y almacena la informacion en objetos de la clase Lemma
         Metodo original: http://stackoverflow.com/questions/22111857/parse-recursively-unknown-json-input-structure-in-java
     */
-    public static void handleValue(com.eclipsesource.json.JsonObject.Member member, JsonValue value) {
+    public static void handleValue(com.eclipsesource.json.JsonObject.Member member, JsonValue value, List<Lemma> lemmas) {
         
         if (value.isObject()) {
-            handleObject(value.asObject());
+            handleObject(value.asObject(), lemmas);
         } else if (value.isString()) {
             if (member != null) {
                 if(cont<=5){
@@ -63,23 +58,23 @@ public class LeerJson {
                        
                     if (cont==5) {
                         cont=0;
-                        Lemma.lemmas.add(new Lemma(pos,lemma,text,type,morphofeat));
+                        lemmas.add(new Lemma(pos,lemma,text,type,morphofeat));
                     }    
                 }
             }
         }
     }
     
-    public static void handleObject(com.eclipsesource.json.JsonObject object) {
+    public static void handleObject(com.eclipsesource.json.JsonObject object, List<Lemma> lemmas) {
         for (com.eclipsesource.json.JsonObject.Member next : object) {
             JsonValue value = next.getValue();
-            handleValue(next, value);
+            handleValue(next, value, lemmas);
         }
     }
 
-    public static void recurseArray(com.eclipsesource.json.JsonArray array) {
+    public static void recurseArray(com.eclipsesource.json.JsonArray array, List<Lemma> lemmas) {
         for (JsonValue value : array) {
-            handleValue(null, value);
+            handleValue(null, value, lemmas);
         }
     }
     

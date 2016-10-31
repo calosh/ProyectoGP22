@@ -13,6 +13,7 @@ import com.eclipsesource.json.JsonObject;
 import java.io.UnsupportedEncodingException;
 import lesk.Lemma;
 import lesk.Lesk;
+import static lesk.Lesk.sentidosBabelNet;
 
 /**
  *
@@ -26,27 +27,19 @@ public class Main {
     static public void main(String[] args) throws UnsupportedEncodingException {
         /*
         Ejecutar:
+                language-identifier-server
                 tokenizer-server -p 9293
-                tokenizer-server -p 9293
+                pos-tagger-server -p 9294
                 kaf2json-server -p 9297
                 
          */
         
         // Codificaion
-        String frase = "Los conos de pino cuelgan en un árbol, mi ñaño se llama luis";
         
-        System.out.println(frase);
-
-        String data = Service.opener(frase);
-        JsonObject jsonObject = JsonObject.readFrom(data);
-        handleObject(jsonObject);
+        //Lesk.lesk("Estoy en el banco depositando dinero a lado del árbol", "árbol");
+        Lesk.lesk("Estoy en la carretera esperandote en el auto", "auto");
         
-        System.out.println(Lemma.lemmas);
-
-        
-        Lesk.buscarSentido("banco");
-        Lesk.sentidosBabelNet();
-               
+        //System.out.println("Lemmas filtrados: "+Lemma.lemmasContexto);
+        //System.out.println(sentidosBabelNet("banco"));  
     }
 }
-
