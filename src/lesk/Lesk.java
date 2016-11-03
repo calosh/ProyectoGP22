@@ -17,27 +17,16 @@ import it.uniroma1.lcl.babelnet.data.BabelSenseSource;
 import it.uniroma1.lcl.jlt.util.Language;
 import it.uniroma1.lcl.jlt.util.ScoredItem;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import com.google.common.collect.Multimap;
+
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import static javafx.scene.input.KeyCode.T;
 import static json.LeerJson.handleObject;
-import static lesk.Lemma.deleteStopWords;
-import static lesk.Lemma.lemmas;
 import service.Service;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import static lesk.Lemma.lemmas;
 
 /**
  * A demo class to test {@link BabelNet}'s various features.
@@ -48,76 +37,90 @@ public class Lesk {
     
     // http://www.bdigital.unal.edu.co/48257/1/1037609063.2015.pdf
     
-    /*
-    public static void lesk(String frase, String desambiguar) throws UnsupportedEncodingException{
-        List<Synset> mejorR = new ArrayList<>();
-        int mayor = 0;
+    public static void lesk(String frase, String desambiguar) throws UnsupportedEncodingException {
+
+        List<Object> listaLemmasDesambiguar = listLemmas(desambiguar);
+        List<Object> matrizLemmasContexto = matrizLemmas(frase, desambiguar, lemmas);
+
+        //System.out.println("Palabra: " + listaLemmasDesambiguar);
+        //System.out.println("Contexto: " + matrizLemmasContexto);
+
+        int cont = 0;
+        int contP = 0;
         Synset bestSense = new Synset();
-        // Devueleve JSON de frase
-        JsonObject jsonObject = Service.opener(frase);
-        // Crea un ArrayList Tipo Lemma con todas las palabras
-        handleObject(jsonObject, lemmas);
-        // Elimina los stop words
-        Lemma.deleteStopWords(lemmas, lemmasContexto);
-        // Elimina palabra a desambiguar
-        Lesk.contexto(Lemma.lemmasContexto, desambiguar);
-        
-        // Recorrer lemmasContexto
-        Iterator<Lemma> it = lemmasContexto.iterator();
-        while (it.hasNext()) {
-            System.out.println("Frase: "+frase);
-            Lemma l = it.next();
-            String text = l.getText();
-            System.out.println("Palabra: "+text);
-            // Obtienes los sentidos del contexto
-            List<Synset> sentidosPalabra = sentidosBabelNet(text); 
-            System.out.println("Sentidos: "+sentidosPalabra);
-            // Se recorre cada sentido
-            List<Lemma> lemmasContextoPalabras = new ArrayList<>();
-            List<Lemma> lemmasContextoPalabrasF = new ArrayList<>();
-            Iterator<Synset> itSentidos = sentidosPalabra.iterator();
+        Synset auxBestSense = new Synset();
+        Iterator<Object> itSentidos = listaLemmasDesambiguar.iterator();
+        while (itSentidos.hasNext()) {
+            Object obj = itSentidos.next();
 
-            while (itSentidos.hasNext()) {
-                Synset s = itSentidos.next();
-                jsonObject = Service.opener(s.getMainSense()+". "+s.getMainGloss());
-                handleObject(jsonObject, lemmasContextoPalabras);
-                // Elimina los stop words --> 
-                Lemma.deleteStopWords(lemmasContextoPalabras, lemmasContextoPalabrasF);
-                // Elimina palabra a desambiguar
-                Lesk.contexto(lemmasContextoPalabrasF, "");
-                
-                System.out.println("Lemas Contexto: "+lemmasContexto);
-                System.out.println("LemasCPF: "+lemmasContextoPalabrasF);
-                mejorR = intersection(lemmasContexto, lemmasContextoPalabrasF, s);
-                System.out.println("Inters: "+mejorR);
-                
-                Iterator<Synset> bs = mejorR.iterator();
-                while (bs.hasNext()) {
-                    System.out.println("Frase: " + frase);
-                    Synset syn = bs.next();
-                    if (syn.getCont() > mayor) {
-                        mayor = syn.getCont();
-                        bestSense = syn;
+            if (cont == 0) {
+                auxBestSense = (Synset) obj;
+                System.out.println("Synset: " + auxBestSense);
+                cont++;
+            } else {
+                List<Lemma> l = (List<Lemma>) obj;
+                Iterator<Lemma> it2 = l.iterator();
+                while (it2.hasNext()) {
+                    Lemma lem = it2.next();
+                    
+                    // Recorrer Matriz
+                    Iterator<Object> it3 = matrizLemmasContexto.iterator();
+                    while (it3.hasNext()) {
+                        List<Lemma> lem2 = (List<Lemma>) it3.next();
+
+                        Iterator<Lemma> it4 = lem2.iterator();
+                        while (it4.hasNext()) {
+                            Lemma lem3 = it4.next();
+                            if (lem.getLemma().equals(lem3.getLemma())) {
+                                contP++;
+                                System.out.println(lem.getText());
+                                System.out.println(contP);
+                            }
+
+                        }/*
+                        if (contP > bestSense.getCont()) {
+                            bestSense = auxBestSense;
+                            bestSense.setCont(contP);
+                            contP = 0;
+                            System.out.println("Mejor hasta ahora: " + bestSense);
+                        } else {
+                            contP = 0;
+                        }    
+                         */
                     }
-                }         
-                // Limpiar datos 
-                lemmasContextoPalabras.clear();
-                lemmasContextoPalabrasF.clear();
-            } 
-        }    
-        System.out.println("El mayor es: "+mayor+" "+bestSense);
-    }
-    */
-    public static void lesk(String frase, String desambiguar) throws UnsupportedEncodingException{
+                    /*
+                    if (contP > bestSense.getCont()) {
+                        bestSense = auxBestSense;
+                        bestSense.setCont(contP);
+                        contP = 0;
+                        System.out.println("Mejor hasta ahora: " + bestSense);
+                    } else {
+                        contP = 0;
+                    }
+                     */
+                }
 
-        System.out.println("Palabra: "+listLemmas(desambiguar));
-        System.out.println("Contexto: "+matrizLemmas(frase, desambiguar, lemmas));
+                if (contP > bestSense.getCont()) {
+                    bestSense = auxBestSense;
+                    bestSense.setCont(contP);
+                    contP = 0;
+                    System.out.println("Mejor hasta ahora: " + bestSense);
+                } else {
+                    contP = 0;
+                }
+                //
+                cont = 0;
+
+            }
+
+        }
+        System.out.println("Mejor sentido " + bestSense + " cont: " + bestSense.getCont());
     }
     
-    public static List<Object> listLemmas(String palabraDesambiguar) throws UnsupportedEncodingException{
+    public static List<Object> listLemmas(String palabraDesambiguar) throws UnsupportedEncodingException {
         List<Object> lista = new ArrayList<>();
         List<Synset> sentidosPalabra = sentidosBabelNet(palabraDesambiguar);
-        
+
         // Se recorre cada sentido
         Iterator<Synset> itSentidos = sentidosPalabra.iterator();
 
@@ -130,14 +133,16 @@ public class Lesk {
             handleObject(jsonObject, lemmasContextoPalabras);
             // Elimina los stop words --> 
             Lemma.deleteStopWords(lemmasContextoPalabras);
-            // Elimina palabra a desambiguar
+            // Elimina palabra a desambiguar2
             //Lesk.contexto(lemmasContextoPalabras, "");
             lista.add(lemmasContextoPalabras);
         }
+        
         return lista;
+        
     }
-    
-    public static List<Object> matrizLemmas(String frase,String desambiguar, List<Lemma> lemmas) throws UnsupportedEncodingException{
+
+    public static List<Object> matrizLemmas(String frase, String desambiguar, List<Lemma> lemmas) throws UnsupportedEncodingException {
         // Devueleve JSON de frase
         JsonObject jsonObject = Service.opener(frase);
         // Crea un ArrayList Tipo Lemma con todas las palabras
@@ -148,7 +153,6 @@ public class Lesk {
         Lesk.contexto(lemmas, desambiguar);
 
         // Itero sobres los lemas del contexto
-
         List<Object> lista = new ArrayList<>();
 
         Iterator<Lemma> it = lemmas.iterator();
@@ -158,12 +162,12 @@ public class Lesk {
 
             List<Synset> sentidosPalabra = sentidosBabelNet(text);
             // Se recorre cada sentido
-            
+
             Iterator<Synset> itSentidos = sentidosPalabra.iterator();
 
             while (itSentidos.hasNext()) {
                 List<Lemma> lemmasContextoPalabras = new ArrayList<>();
-                
+
                 Synset s = itSentidos.next();
                 //lista.add(s);
                 jsonObject = Service.opener(s.getMainSense() + ". " + s.getMainGloss());
@@ -208,26 +212,6 @@ public class Lesk {
             sentidos.add(new Synset(synset.getId()+"",palabra2, synset.getMainGloss(Language.ES).getGloss(),synset.getMainSense(Language.ES).getLemma().replace("_", " ")));
         }
         return sentidos;
-    }
-    
-
-    public static List<Synset> intersection(List<Lemma> lemmas,List<Lemma> lemmas2, Synset s) {
-        List<Synset> list = new ArrayList<>();
-        Iterator<Lemma> it = lemmas.iterator();
-        while (it.hasNext()) {
-            Lemma l = it.next();
-            
-            Iterator<Lemma> it2 = lemmas2.iterator();
-            while (it2.hasNext()) {
-                Lemma l2 = it2.next();
-            
-                if(l.getLemma().equals(l2.getLemma())) {
-                    s.setCont(s.getCont()+1);
-                    list.add(s);
-                }
-            }
-        }
-       return list; 
     }
     
 }

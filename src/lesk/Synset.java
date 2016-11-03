@@ -24,7 +24,7 @@ public class Synset {
 
     }
 
-        public Synset(String id, String word, String mainGloss, String mainSense) {
+    public Synset(String id, String word, String mainGloss, String mainSense) {
         this.id = id;
         this.mainGloss = mainGloss;
         this.mainSense = mainSense;
@@ -85,13 +85,6 @@ public class Synset {
     public void setWord(String word) {
         this.word = word;
     }
-    
-    
-    @Override
-    public String toString() {
-        // {"pos":"V","lemma":"estoy","text":"Estoy","type":"open","morphofeat":"VMIP1S0"}
-        return "id:" + id + ", mainGloss:" + mainGloss + "mainSense" + mainSense +"\n";
-    }
 
     /**
      * @return the cont
@@ -105,6 +98,12 @@ public class Synset {
      */
     public void setCont(int cont) {
         this.cont = cont;
+    }
+    
+    @Override
+    public String toString() {
+        // {"pos":"V","lemma":"estoy","text":"Estoy","type":"open","morphofeat":"VMIP1S0"}
+        return "id:" + id + ", mainGloss:" + mainGloss + "mainSense" + mainSense + "\n";
     }
 
 }

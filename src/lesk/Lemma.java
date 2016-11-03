@@ -114,24 +114,6 @@ public class Lemma {
         // {"pos":"V","lemma":"estoy","text":"Estoy","type":"open","morphofeat":"VMIP1S0"}
         return "pos:"+pos+", lemma:"+lemma+", text: "+text+", type:"+type+", morphofeat:"+morphofeat+"\n";
     }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null) {
-            return false;
-        }
-
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Lemma otro = (Lemma) obj;
-
-        return text == text;
-    }
     
     //public static void deleteStopWords(List<Lemma> lemmas, List<Lemma> lemmasFiltrados){
     public static void deleteStopWords(List<Lemma> lemmas){
@@ -139,11 +121,10 @@ public class Lemma {
         Iterator<Lemma> it = lemmas.iterator();
         
         while(it.hasNext()){
-            Lemma l = new Lemma();
-            l=it.next();
+            Lemma l =it.next();
             String pos = l.getPos();
-            if(pos.equals("N")||pos.equals("V")||pos.equals("G")){ 
-                //lemmasFiltrados.add(new Lemma(l.getPos(),l.getLemma(),l.getText(),l.getType(),l.getMorphofeat()));
+            if(pos.equals("N")||pos.equals("V")||pos.equals("G")){
+                
                 if(l.getLemma().equals("ser")){
                     it.remove();
                 }
@@ -151,8 +132,7 @@ public class Lemma {
             }else{
                 it.remove();
             } 
-        }
-            
+        }    
     }
 
 }
