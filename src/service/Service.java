@@ -27,7 +27,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import static java.nio.charset.StandardCharsets.*;
 
 public class Service {
     

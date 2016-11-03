@@ -37,7 +37,7 @@ public class Main {
         // Codificaion
         
         //Lesk.lesk("Estoy en el banco depositando dinero a lado del árbol", "árbol");
-        Lesk.lesk("Estoy en la carretera esperandote en el auto", "auto");
+        Lesk.lesk("Estoy en el banco depositando dinero", "banco");
         
         //System.out.println("Lemmas filtrados: "+Lemma.lemmasContexto);
         //System.out.println(sentidosBabelNet("banco"));  

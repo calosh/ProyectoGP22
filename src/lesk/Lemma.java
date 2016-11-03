@@ -21,8 +21,6 @@ public class Lemma {
     // Conjunto de Lemmas de la frase
     public static List<Lemma> lemmas = new ArrayList<>();
     // Conjunto de Lemmas de la frase sin Stop Words
-    public static List<Lemma> lemmasContexto = new ArrayList<>();
-    // Conjunto de Lemmas del Contexto
     
     private String pos;
     private String lemma;
@@ -135,7 +133,8 @@ public class Lemma {
         return text == text;
     }
     
-    public static void deleteStopWords(List<Lemma> lemmas, List<Lemma> lemmasFiltrados){
+    //public static void deleteStopWords(List<Lemma> lemmas, List<Lemma> lemmasFiltrados){
+    public static void deleteStopWords(List<Lemma> lemmas){
         // verbos, adjetivos o sustantivos.
         Iterator<Lemma> it = lemmas.iterator();
         
@@ -144,9 +143,16 @@ public class Lemma {
             l=it.next();
             String pos = l.getPos();
             if(pos.equals("N")||pos.equals("V")||pos.equals("G")){ 
-                lemmasFiltrados.add(new Lemma(l.getPos(),l.getLemma(),l.getText(),l.getType(),l.getMorphofeat()));
+                //lemmasFiltrados.add(new Lemma(l.getPos(),l.getLemma(),l.getText(),l.getType(),l.getMorphofeat()));
+                if(l.getLemma().equals("ser")){
+                    it.remove();
+                }
+                
+            }else{
+                it.remove();
             } 
         }
             
     }
+
 }
