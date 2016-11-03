@@ -12,7 +12,6 @@ package service;
 
 import com.eclipsesource.json.JsonObject;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,4 +105,5 @@ public class Service {
         }
         return null;
     }
+
 }

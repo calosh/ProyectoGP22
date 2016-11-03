@@ -5,15 +5,8 @@
  */
 package controlador;
 
-import static json.LeerJson.handleObject;
-
-import service.Service;
-
-import com.eclipsesource.json.JsonObject;
 import java.io.UnsupportedEncodingException;
-import lesk.Lemma;
 import lesk.Lesk;
-import static lesk.Lesk.sentidosBabelNet;
 
 /**
  *
@@ -23,6 +16,7 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.UnsupportedEncodingException
      */
     static public void main(String[] args) throws UnsupportedEncodingException {
         /*
@@ -34,12 +28,8 @@ public class Main {
                 
          */
         
-        // Codificaion
-        
         //Lesk.lesk("Estoy en el banco depositando dinero a lado del árbol", "árbol");
         Lesk.lesk("Estoy en el banco depositando dinero", "banco");
-        
-        //System.out.println("Lemmas filtrados: "+Lemma.lemmasContexto);
-        //System.out.println(sentidosBabelNet("banco"));  
+         
     }
 }

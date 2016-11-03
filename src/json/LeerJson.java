@@ -16,7 +16,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
-import java.util.ArrayList;
 import java.util.List;
 
 import lesk.Lemma;
@@ -121,7 +120,7 @@ public class LeerJson {
     Metodo para recorrer json
     No utilizado
     http://blog.openalfa.com/como-leer-y-escribir-ficheros-json-en-java
-    */
+    
     public static void dumpJSONElement(JsonElement elemento) {
 
         if (elemento.isJsonObject()) {
@@ -160,4 +159,5 @@ public class LeerJson {
             System.out.println("Es otra cosa");
         }
     }
+    */
 }

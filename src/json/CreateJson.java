@@ -8,15 +8,13 @@ package json;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
-import static prueba.Json.PRETTY_PRINT_INDENT_FACTOR;
-import static prueba.Json.TEST_XML_STRING;
 
 /**
  *
  * @author calosh
  */
 
-/*No se usa*/
+// No se utiliza
 public class CreateJson {
     
     private static int PRETTY_PRINT_INDENT_FACTOR = 4;
