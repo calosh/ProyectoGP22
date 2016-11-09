@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import it.uniroma1.lcl.babelnet.BabelNet;
 import java.io.UnsupportedEncodingException;
 import lesk.Lesk;
 
@@ -29,7 +30,11 @@ public class Main {
          */
         
         //Lesk.lesk("Estoy en el banco depositando dinero a lado del árbol", "árbol");
-        Lesk.lesk("Estoy en el banco depositando dinero", "banco");
-         
+        
+        
+       // Lesk.lesk("Estoy en la Universidad recibiendo clases", "clase");
+        Lesk.lesk("Estoy en la carretera en el auto esperandote", "auto");
+        
+        Lesk.lesk("Estoy en la Universidad recibiendo clases", "clase");         
     }
 }

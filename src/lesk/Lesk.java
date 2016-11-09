@@ -35,6 +35,8 @@ import static lesk.Lemma.lemmas;
  */
 public class Lesk {
     
+    public static BabelNet bn = BabelNet.getInstance();
+    
     // http://www.bdigital.unal.edu.co/48257/1/1037609063.2015.pdf
     
     public static void lesk(String frase, String desambiguar) throws UnsupportedEncodingException {
@@ -115,8 +117,13 @@ public class Lesk {
 
         }
         System.out.println("Mejor sentido " + bestSense + " cont: " + bestSense.getCont());
+        
+        clearData();
     }
     
+    /*
+        Retorna un arratList con la lista de 
+    */
     public static List<Object> listLemmas(String palabraDesambiguar) throws UnsupportedEncodingException {
         List<Object> lista = new ArrayList<>();
         List<Synset> sentidosPalabra = sentidosBabelNet(palabraDesambiguar);
@@ -198,11 +205,18 @@ public class Lesk {
         }        
     }
     
+    /*
+        Retorna un Array List<Synset> con el conjunto de definiciones de una palabra
+    */
     public static List<Synset> sentidosBabelNet(String palabra) throws UnsupportedEncodingException{
         //System.out.println("Sentido: "+palabra);
         List<Synset> sentidos = new ArrayList<>();
+        /*
+        List<Synset> sentidos = new ArrayList<>();
         BabelNet bn = BabelNet.getInstance();
+        */
         palabra = new String(palabra.getBytes("UTF-8"), "ISO-8859-1");
+        
         for (BabelSynset synset : bn.getSynsets(palabra, Language.ES)) {
             //System.out.println("Synset ID: " + synset.getId());
             //System.out.println("=== DEMO ===");
@@ -212,6 +226,12 @@ public class Lesk {
             sentidos.add(new Synset(synset.getId()+"",palabra2, synset.getMainGloss(Language.ES).getGloss(),synset.getMainSense(Language.ES).getLemma().replace("_", " ")));
         }
         return sentidos;
+    }
+
+    private static void clearData() {
+        lemmas=new ArrayList<>();
+        json.LeerJson.cont=0;
+        
     }
     
 }
