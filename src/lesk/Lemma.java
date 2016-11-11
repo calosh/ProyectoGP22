@@ -124,10 +124,11 @@ public class Lemma {
             Lemma l =it.next();
             String pos = l.getPos();
             if(pos.equals("N")||pos.equals("V")||pos.equals("G")){
-                
+                /*
                 if(l.getLemma().equals("ser")){
                     it.remove();
                 }
+                */
                 
             }else{
                 it.remove();

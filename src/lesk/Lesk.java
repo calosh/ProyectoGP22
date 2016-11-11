@@ -44,8 +44,8 @@ public class Lesk {
         List<Object> listaLemmasDesambiguar = listLemmas(desambiguar);
         List<Object> matrizLemmasContexto = matrizLemmas(frase, desambiguar, lemmas);
 
-        //System.out.println("Palabra: " + listaLemmasDesambiguar);
-        //System.out.println("Contexto: " + matrizLemmasContexto);
+        System.out.println("Palabra: " + listaLemmasDesambiguar);
+        System.out.println("Contexto: " + matrizLemmasContexto);
 
         int cont = 0;
         int contP = 0;
@@ -73,6 +73,7 @@ public class Lesk {
                         Iterator<Lemma> it4 = lem2.iterator();
                         while (it4.hasNext()) {
                             Lemma lem3 = it4.next();
+                            System.out.println(lem.getLemma()+"-"+lem3.getLemma());
                             if (lem.getLemma().equals(lem3.getLemma())) {
                                 contP++;
                                 System.out.println(lem.getText());
